@@ -1,7 +1,12 @@
 #!/bin/bash
 
 if [ -z "$1" ]; then
-	echo "Error: need to specify where the code is."
+	echo "Error: need to specify a build directory"
+	exit 0
+fi
+
+if [ ! -f "`realpath $1`/gradlew" ]; then
+	echo "Error: gradlew not found (`realpath $1`/gradlew)"
 	exit 0
 fi
 
