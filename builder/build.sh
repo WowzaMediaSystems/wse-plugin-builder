@@ -3,6 +3,14 @@
 cd /code
 
 gradle_cmd="${GRADLECMD:-Build}"
+echo ""
+echo "Using:"
+if [ -f "/usr/local/WowzaStreamingEngine/conf/Server.version" ]; then
+  echo "Wowza Stream Engine `cat /usr/local/WowzaStreamingEngine/conf/Server.version`"
+else
+  echo "Wowza Stream Engine `cat /tmp/DOCKER_IMAGE_VERSION`"
+fi
+java --version
 
 run_and_prompt() {
   echo ""
