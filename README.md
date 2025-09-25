@@ -12,9 +12,9 @@ This will create an docker image `wse-builder:local` that can be used to build c
 
 ### Compile Module to .jar
 To compile a WSE plugin to be used with WSE, running the follow code with the directory that contains the WSE plug java code.  This will create a .jar file that can be used with WSE.
-Provided in this repo is MyFirstPlugin as an example you can test with.
+Provided in this repo is MyFirstPlugin as an example module you can test with.
 ```
-./local_run.sh //code/wse-plugin-my-first-plugin
+./local_run.sh ./code/wse-plugin-my-first-plugin
 ```
 
 This creates the WSE plugin .jar: `code/wse-plugin-my-first-plugin/build/libs/wse-plugin-my-first-plugin-1.0.0.jar` which can be run with WSE
@@ -29,6 +29,7 @@ To test the newly created module, you can run:
 docker compose up
 ```
 Which will start the WSE trial docker image, map the lib.addon directory to the newly created jar file.
+
 See [Get Started With Wowza Streaming Engine](https://www.wowza.com/wse-get-started) for more details on running WSE with docker and docker compose
 
 ## Other Resources
