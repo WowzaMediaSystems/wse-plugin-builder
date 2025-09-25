@@ -22,6 +22,16 @@ This creates the WSE plugin .jar: `code/wse-plugin-my-first-plugin/build/libs/ws
 
 This plugin contains a ServerListener `com.wowza.wms.plugin.myFirstPlugin.MyFirstServerListener` that starts when WSE starts, and a Application Module `com.wowza.wms.plugin.myFirstPlugin.MyFirstModule` that starts when a stream is connected.
 Both will simple log a message to the console when started.
+```
+**********************************************
+* Welcome to my first Server Listener v1.0.0 *
+**********************************************
+```
+```
+********************************************************
+* Welcome to my first Application Module Plugin v1.0.0 *
+********************************************************
+```
 
 ### Test
 To test the newly created module, you can run:

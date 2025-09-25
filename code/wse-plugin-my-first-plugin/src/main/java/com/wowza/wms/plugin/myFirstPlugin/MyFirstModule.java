@@ -27,9 +27,9 @@ public class MyFirstModule extends ModuleBase
     public void onAppCreate(IApplicationInstance appInstance)
     {
         logger = WMSLoggerFactory.getLoggerObj(CLASS, appInstance);
-        logger.info("******************************************************");
-        logger.info("Welcome to my first Application Module Plugin v"+MODULE_VERSION+" *");
-        logger.info("******************************************************");
+        logger.info("********************************************************");
+        logger.info("* Welcome to my first Application Module Plugin v"+MODULE_VERSION+" *");
+        logger.info("********************************************************");
         this.appInstance=appInstance;
     }
 
