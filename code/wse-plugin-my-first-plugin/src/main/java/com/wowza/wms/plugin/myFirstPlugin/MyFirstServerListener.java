@@ -28,16 +28,19 @@ public class MyFirstServerListener implements IServerNotify2
 	@Override
 	public void onServerShutdownStart(IServer server)
 	{
+		WMSLoggerFactory.getLogger(null).info("onServerShutdownStart");
 	}
 
 	@Override
 	public void onServerShutdownComplete(IServer server)
 	{
+		WMSLoggerFactory.getLogger(null).info("onServerShutdownComplete");
 	}
 
 	@Override
 	public void onServerConfigLoaded(IServer server)
 	{
+		WMSLoggerFactory.getLogger(null).info("onServerConfigLoaded");
 	}
 
 }
