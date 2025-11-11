@@ -6,7 +6,7 @@ A Gradle and Docker-based development environment for building and testing custo
 
 The **Wowza Streaming Engine Plugin Builder** provides a modern, containerized development environment for building and testing custom Java modules that extend the functionality of the [Wowza Streaming Engine™ media server software](https://www.wowza.com/products/streaming-engine).
 
-This project includes a streamlined Gradle-based build system and a Docker Compose setup that runs Wowza Streaming Engine in a local container. The approach allows developers to build, package, and deploy custom Wowza Streaming Engine extensions quickly and consistently across platforms.
+This project includes a streamlined Gradle-based build system and a Docker Compose setup that runs Wowza Streaming Engine in a local container. The approach allows developers to build, package, and deploy [custom Wowza Streaming Engine extensions](https://www.wowza.com/docs/use-wowza-streaming-engine-java-modules#use-custom-modules) quickly and consistently across platforms.
 
 ## Features
 
