@@ -1,56 +1,144 @@
-# Wowza Plugin Builder
-The **Wowza Plugin Builder** container is used to build modles for [Wowza Streaming Engine™ media server software](https://www.wowza.com/products/streaming-engine).
+# Wowza Streaming Engine Plugin Builder
 
+A Gradle- and Docker-based development environment for building and testing custom Java modules that extend Wowza Streaming Engine™.
+
+---
+
+## Overview
+
+The **Wowza Streaming Engine Plugin Builder** provides a modern, containerized development environment for building and testing custom Java modules that extend the functionality of the [Wowza Streaming Engine™ media server software](https://www.wowza.com/products/streaming-engine).
+
+This project provides a streamlined Gradle-based build system and a Docker Compose setup that runs Wowza Streaming Engine in a local container. The approach allows developers to build, package, and deploy custom Wowza Streaming Engine extensions quickly and consistently across platforms.
+
+---
+
+## Features
+
+* **Gradle build system** — Compile, package, and manage dependencies for your Wowza Streaming Engine Java modules with ease.
+* **Docker Compose deployment** — Spin up a fully configured Wowza Streaming Engine container for local testing and iteration.
+* **Modular development** — Extend Wowza Streaming Engine functionality using custom Java classes and interfaces.
+* **Cross-platform setup** — Works seamlessly on Windows, Linux, and macOS.
+
+---
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+* [ ] A Wowza Streaming Engine license key.
+* [ ] Install and run Docker Desktop [https://www.docker.com/products/docker-desktop/], which includes the Docker Engine and the Docker Compose plugin.
+
+---
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone git@github.com:WowzaMediaSystems/wse-plugin-builder.git
+cd wse-plugin-builder
+```
+
+Update the **WSE_LICENSE_KEY** variable in the docker-compose.yaml file with your Wowza Streaming Engine license key:
+
+```bash
+export WSE_LICENSE_KEY=[your-license-key]
+```
+
+---
 
 ## Usage
-### Initialization
-First the container needs to be built.  Run the following script to create the `wse-builder ` docker image:
-```
-./local_build.sh
-```
-This will create an docker image `wse-builder:local` that can be used to build custom WSE modules.
 
-### Compile Module to .jar
-To compile a WSE plugin to be used with WSE, running the follow code with the directory that contains the WSE plug java code.  This will create a .jar file that can be used with WSE.
-Provided in this repo is MyFirstPlugin as an example module you can test with.
-```
-./local_run.sh ./code/wse-plugin-my-first-plugin
+### Build the Docker image
+
+First, make sure Docker Desktop and Docker Engine are running. Then initialize the project and build the Docker container. Run the following from the root of your project:
+
+```bash
+./build_builder.sh
 ```
 
-This creates the WSE plugin .jar: `code/wse-plugin-my-first-plugin/build/libs/wse-plugin-my-first-plugin-1.0.0.jar` which can be run with WSE
+This builds a new Docker image named `wse-builder:local` using the Dockerfile in this repository. The image provides a build environment for compiling custom Wowza Streaming Engine™ modules.
 
+### Compile the module to a .jar
 
-This plugin contains a ServerListener `com.wowza.wms.plugin.myFirstPlugin.MyFirstServerListener` that starts when WSE starts, and a Application Module `com.wowza.wms.plugin.myFirstPlugin.MyFirstModule` that starts when a stream is connected.
-Both will simple log a message to the console when started.
+Next, compile the module so it can be used as a plugin with Wowza Streaming Engine. An example module, **MyFirstPlugin**, is included in this repository for testing and demonstration purposes. Run the following from the root of your project:
+
+```bash
+./build.sh ./code/wse-plugin-my-first-plugin
 ```
+
+This process generates the following plugin .jar file, which can be deployed and run with Wowza Streaming Engine:
+
+`code/wse-plugin-my-first-plugin/build/libs/wse-plugin-my-first-plugin-1.0.0.jar`
+
+The example plugin includes:
+
+* [Server Listener](https://github.com/WowzaMediaSystems/wse-plugin-builder/blob/main/code/wse-plugin-my-first-plugin/src/main/java/com/wowza/wms/plugin/myFirstPlugin/MyFirstServerListener.java): `com.wowza.wms.plugin.myFirstPlugin.MyFirstServerListener` — Starts automatically when the Wowza Streaming Engine launches.
+* [Application Module](https://github.com/WowzaMediaSystems/wse-plugin-builder/blob/main/code/wse-plugin-my-first-plugin/src/main/java/com/wowza/wms/plugin/myFirstPlugin/MyFirstModule.java): `com.wowza.wms.plugin.myFirstPlugin.MyFirstModule` — Initializes when an application starts as the first stream connects to it.
+
+Both components simply log a startup message to the console:
+
+```text
 **********************************************
 * Welcome to my first Server Listener v1.0.0 *
 **********************************************
 ```
-```
+
+```text
 ********************************************************
 * Welcome to my first Application Module Plugin v1.0.0 *
 ********************************************************
 ```
 
-### Test
-To test the newly created module, you can run:
-```
+You can modify these sample modules by adding any custom logic inside the example methods we provide. For more, see our [Custom Java module examples](https://www.wowza.com/docs/basic-java-code-examples-for-wowza-media-server).
+
+### Test your module
+
+To test the newly created module, run:
+
+```bash
 docker compose up
 ```
-Which will start the WSE trial docker image, map the lib.addon directory to the newly created jar file.
 
-See [Get Started With Wowza Streaming Engine](https://www.wowza.com/wse-get-started) for more details on running WSE with docker and docker compose
+This starts the Wowza Streaming Engine trial Docker image and maps the `lib.addon` directory to the newly created .jar file. With a successful setup, you'll see the following in the combined service logs in your terminal:
 
-## Other Resources
-[Wowza Streaming Engine Server-Side API Reference](https://www.wowza.com/resources/serverapi/)
+```text
+wse-1      | INFO server comment - Server.startShutdownHook: Start server shutdown hook
+wse-1      | INFO server comment - **********************************************
+wse-1      | INFO server comment - * Welcome to my first Server Listener v1.0.0 *
+wse-1      | INFO server comment - **********************************************
+wse-1      | INFO server comment - StatsManager:startManager() Enabled=true
+wse-1      | INFO server comment - Wowza Streaming Engine is started!
+```
 
-[How to extend Wowza Streaming Engine using the Wowza IDE](https://www.wowza.com/docs/how-to-extend-wowza-streaming-engine-using-the-wowza-ide)
+To learn more about this workflow and to launch and test your Wowza Streaming Engine instance, see:
+
+* [Get Started With Wowza Streaming Engine](https://www.wowza.com/wse-get-started)
+* [Set up Wowza Streaming Engine using a Docker Compose deployment](https://www.wowza.com/docs/set-up-wowza-streaming-engine-using-a-docker-compose-deployment)
+
+---
+
+## Other resources
 
 Wowza Media Systems™ provides developers with a platform to create streaming applications and solutions. See [Wowza Developer Tools](https://www.wowza.com/developer) to learn more about our APIs and SDK.
 
+You can also view our [official Developer API and SDK documentation](https://www.wowza.com/docs/wowza-developer-apis-and-sdks) and these resources:
+
+* [Wowza Streaming Engine Server-Side Java API reference](https://www.wowza.com/resources/serverapi/)
+* [Use Wowza Streaming Engine Java modules](https://www.wowza.com/docs/use-wowza-streaming-engine-java-modules)
+* [Use custom Java modules](https://www.wowza.com/docs/use-wowza-streaming-engine-java-modules#use-custom-modules3)
+* [Module and plugin examples hosted on GitHub](https://www.wowza.com/docs/wowza-streaming-engine-java-module-examples)
+* [Custom Java module examples](https://www.wowza.com/docs/basic-java-code-examples-for-wowza-media-server)
+* [How to extend Wowza Streaming Engine using the Wowza IDE](https://www.wowza.com/docs/how-to-extend-wowza-streaming-engine-using-the-wowza-ide)
+
+---
+
 ## Contact
-[Wowza Media Systems, LLC](https://www.wowza.com/contact)
+
+For questions or comments, contact [Wowza Media Systems, LLC](https://www.wowza.com/contact).
+
+---
 
 ## License
+
 This code is distributed under the [Wowza Public License](/LICENSE.txt).
