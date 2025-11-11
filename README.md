@@ -1,12 +1,12 @@
 # Wowza Streaming Engine Plugin Builder
 
-A Gradle- and Docker-based development environment for building and testing custom Java modules that extend Wowza Streaming Engine™.
+A Gradle and Docker-based development environment for building and testing custom Java modules that extend Wowza Streaming Engine™.
 
 ## Overview
 
 The **Wowza Streaming Engine Plugin Builder** provides a modern, containerized development environment for building and testing custom Java modules that extend the functionality of the [Wowza Streaming Engine™ media server software](https://www.wowza.com/products/streaming-engine).
 
-This project provides a streamlined Gradle-based build system and a Docker Compose setup that runs Wowza Streaming Engine in a local container. The approach allows developers to build, package, and deploy custom Wowza Streaming Engine extensions quickly and consistently across platforms.
+This project includes a streamlined Gradle-based build system and a Docker Compose setup that runs Wowza Streaming Engine in a local container. The approach allows developers to build, package, and deploy custom Wowza Streaming Engine extensions quickly and consistently across platforms.
 
 ## Features
 
@@ -41,7 +41,7 @@ export WSE_LICENSE_KEY=[your-license-key]
 
 ### Build the Docker image
 
-Before you continue, make sure Docker Desktop and Docker Engine are running. Then, initialize the project and build the Docker container. Run the following from the root of your project:
+Make sure Docker Desktop and Docker Engine are running. Then, initialize the project and build the Docker container. Run the following from the root of your project:
 
 ```bash
 ./build_builder.sh
@@ -63,8 +63,8 @@ This process generates the following plugin .jar file, which can be deployed and
 
 The example plugin includes:
 
-* [Server Listener](https://github.com/WowzaMediaSystems/wse-plugin-builder/blob/main/code/wse-plugin-my-first-plugin/src/main/java/com/wowza/wms/plugin/myFirstPlugin/MyFirstServerListener.java): `com.wowza.wms.plugin.myFirstPlugin.MyFirstServerListener` — Starts automatically when the Wowza Streaming Engine launches.
-* [Application Module](https://github.com/WowzaMediaSystems/wse-plugin-builder/blob/main/code/wse-plugin-my-first-plugin/src/main/java/com/wowza/wms/plugin/myFirstPlugin/MyFirstModule.java): `com.wowza.wms.plugin.myFirstPlugin.MyFirstModule` — Initializes when an application starts as the first stream connects to it.
+* [Server Listener](https://github.com/WowzaMediaSystems/wse-plugin-builder/blob/main/code/wse-plugin-my-first-plugin/src/main/java/com/wowza/wms/plugin/myFirstPlugin/MyFirstServerListener.java): `com.wowza.wms.plugin.myFirstPlugin.MyFirstServerListener` — Starts automatically when the Wowza Streaming Engine server launches.
+* [Application Module](https://github.com/WowzaMediaSystems/wse-plugin-builder/blob/main/code/wse-plugin-my-first-plugin/src/main/java/com/wowza/wms/plugin/myFirstPlugin/MyFirstModule.java): `com.wowza.wms.plugin.myFirstPlugin.MyFirstModule` — Initializes when an application starts and the first stream connects to it.
 
 Both components simply log a startup message to the console:
 
@@ -101,7 +101,7 @@ wse-1      | INFO server comment - StatsManager:startManager() Enabled=true
 wse-1      | INFO server comment - Wowza Streaming Engine is started!
 ```
 
-To learn more about this Docker Compose workflow, see:
+To learn more about our Docker Compose workflows, see:
 
 * [Get Started With Wowza Streaming Engine](https://www.wowza.com/wse-get-started)
 * [Set up Wowza Streaming Engine using a Docker Compose deployment](https://www.wowza.com/docs/set-up-wowza-streaming-engine-using-a-docker-compose-deployment)
