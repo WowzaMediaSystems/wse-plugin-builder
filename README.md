@@ -117,6 +117,7 @@ You can also view our [official Developer API and SDK documentation](https://www
 * [Use custom Java modules](https://www.wowza.com/docs/use-wowza-streaming-engine-java-modules#use-custom-modules3)
 * [Module and plugin examples hosted on GitHub](https://www.wowza.com/docs/wowza-streaming-engine-java-module-examples)
 * [Custom Java module examples](https://www.wowza.com/docs/basic-java-code-examples-for-wowza-media-server)
+* [Use event listeners in Wowza Streaming Engine](https://www.wowza.com/docs/use-event-listeners-in-wowza-streaming-engine)
 * [How to extend Wowza Streaming Engine using the Wowza IDE](https://www.wowza.com/docs/how-to-extend-wowza-streaming-engine-using-the-wowza-ide)
 
 ## Contact
