@@ -17,30 +17,6 @@ This project includes a streamlined Gradle-based build system and a Docker Compo
 
 ## Usage
 
-## Prerequisites
-
-Before you begin, make sure you have:
-
-* A Wowza Streaming Engine license key.
-* Install and run [Docker Desktop](https://www.docker.com/products/docker-desktop/), which includes the Docker Engine and the Docker Compose plugin.
-
-## Installation
-
-Clone the repository and change to that directory:
-
-```bash
-git clone git@github.com:WowzaMediaSystems/wse-plugin-builder.git
-cd wse-plugin-builder
-```
-
-Update the **WSE_LICENSE_KEY** variable in the docker-compose.yaml file with your Wowza Streaming Engine license key:
-
-```bash
-export WSE_LICENSE_KEY=[your-license-key]
-```
-
-## Usage
-
 An example module, **MyFirstPlugin**, is included in this repository for testing and demonstration purposes. The example plugin includes:
 
 * [Server Listener](https://github.com/WowzaMediaSystems/wse-plugin-builder/blob/main/code/wse-plugin-my-first-plugin/src/main/java/com/wowza/wms/plugin/myFirstPlugin/MyFirstServerListener.java): `com.wowza.wms.plugin.myFirstPlugin.MyFirstServerListener` — Starts automatically when the Wowza Streaming Engine server launches.
@@ -62,7 +38,29 @@ Both components simply log a startup message to the console:
 
 You can modify these sample modules by adding any custom logic inside the example methods we provide. For more, see our [Custom Java module examples](https://www.wowza.com/docs/basic-java-code-examples-for-wowza-media-server).
 
-### Build the Docker image
+## Prerequisites
+
+Before you begin, make sure you have:
+
+* A Wowza Streaming Engine license key.
+* Install and run [Docker Desktop](https://www.docker.com/products/docker-desktop/), which includes the Docker Engine and the Docker Compose plugin.
+
+## 1. Installation
+
+Clone the repository and change to that directory:
+
+```bash
+git clone git@github.com:WowzaMediaSystems/wse-plugin-builder.git
+cd wse-plugin-builder
+```
+
+Update the **WSE_LICENSE_KEY** variable in the docker-compose.yaml file with your Wowza Streaming Engine license key:
+
+```bash
+export WSE_LICENSE_KEY=[your-license-key]
+```
+
+## 2. Build the Docker image
 
 Make sure Docker Desktop and Docker Engine are running. Then, initialize the project and build the Docker container. Run the following from the root of your project:
 
@@ -72,7 +70,7 @@ Make sure Docker Desktop and Docker Engine are running. Then, initialize the pro
 
 This builds a new Docker image named `wse-builder:local` using the Dockerfile in this repository. The image provides a build environment for compiling custom Wowza Streaming Engine modules.
 
-### Compile the module to a .jar
+## 3. Compile the module to a .jar
 
 Next, compile the module so it can be used as a plugin with Wowza Streaming Engine. Run the following from the root of your project:
 
@@ -84,7 +82,7 @@ This process generates the following plugin .jar file, which can be deployed and
 
 `code/wse-plugin-my-first-plugin/build/libs/wse-plugin-my-first-plugin-1.0.0.jar`
 
-### Test your module
+## 4. Test your module
 
 To test the newly created module, run the following from the root of your project:
 
