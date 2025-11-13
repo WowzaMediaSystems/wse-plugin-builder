@@ -112,7 +112,7 @@ Wowza Media Systems™ provides developers with a platform to create streaming a
 
 You can also view our [official Developer API and SDK documentation](https://www.wowza.com/docs/wowza-developer-apis-and-sdks) and these resources:
 
-* [Wowza Streaming Engine Server-Side Java API reference](https://www.wowza.com/resources/serverapi/)
+* [Wowza Streaming Engine server-side Java API reference](https://www.wowza.com/resources/serverapi/)
 * [Use Wowza Streaming Engine Java modules](https://www.wowza.com/docs/use-wowza-streaming-engine-java-modules)
 * [Use custom Java modules](https://www.wowza.com/docs/use-wowza-streaming-engine-java-modules#use-custom-modules3)
 * [Module and plugin examples hosted on GitHub](https://www.wowza.com/docs/wowza-streaming-engine-java-module-examples)
