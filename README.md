@@ -15,6 +15,8 @@ This project includes a streamlined Gradle-based build system and a Docker Compo
 * **Modular development** — Extend Wowza Streaming Engine functionality using custom Java classes and interfaces.
 * **Cross-platform setup** — Works seamlessly on Windows, Linux, and macOS.
 
+## Usage
+
 ## Prerequisites
 
 Before you begin, make sure you have:
@@ -39,29 +41,7 @@ export WSE_LICENSE_KEY=[your-license-key]
 
 ## Usage
 
-### Build the Docker image
-
-Make sure Docker Desktop and Docker Engine are running. Then, initialize the project and build the Docker container. Run the following from the root of your project:
-
-```bash
-./build_builder.sh
-```
-
-This builds a new Docker image named `wse-builder:local` using the Dockerfile in this repository. The image provides a build environment for compiling custom Wowza Streaming Engine modules.
-
-### Compile the module to a .jar
-
-Next, compile the module so it can be used as a plugin with Wowza Streaming Engine. An example module, **MyFirstPlugin**, is included in this repository for testing and demonstration purposes. Run the following from the root of your project:
-
-```bash
-./build.sh ./code/wse-plugin-my-first-plugin
-```
-
-This process generates the following plugin .jar file, which can be deployed and run with Wowza Streaming Engine:
-
-`code/wse-plugin-my-first-plugin/build/libs/wse-plugin-my-first-plugin-1.0.0.jar`
-
-The example plugin includes:
+An example module, **MyFirstPlugin**, is included in this repository for testing and demonstration purposes. The example plugin includes:
 
 * [Server Listener](https://github.com/WowzaMediaSystems/wse-plugin-builder/blob/main/code/wse-plugin-my-first-plugin/src/main/java/com/wowza/wms/plugin/myFirstPlugin/MyFirstServerListener.java): `com.wowza.wms.plugin.myFirstPlugin.MyFirstServerListener` — Starts automatically when the Wowza Streaming Engine server launches.
 * [Application Module](https://github.com/WowzaMediaSystems/wse-plugin-builder/blob/main/code/wse-plugin-my-first-plugin/src/main/java/com/wowza/wms/plugin/myFirstPlugin/MyFirstModule.java): `com.wowza.wms.plugin.myFirstPlugin.MyFirstModule` — Initializes when an application starts and the first stream connects to it.
@@ -82,9 +62,31 @@ Both components simply log a startup message to the console:
 
 You can modify these sample modules by adding any custom logic inside the example methods we provide. For more, see our [Custom Java module examples](https://www.wowza.com/docs/basic-java-code-examples-for-wowza-media-server).
 
+### Build the Docker image
+
+Make sure Docker Desktop and Docker Engine are running. Then, initialize the project and build the Docker container. Run the following from the root of your project:
+
+```bash
+./build_builder.sh
+```
+
+This builds a new Docker image named `wse-builder:local` using the Dockerfile in this repository. The image provides a build environment for compiling custom Wowza Streaming Engine modules.
+
+### Compile the module to a .jar
+
+Next, compile the module so it can be used as a plugin with Wowza Streaming Engine. Run the following from the root of your project:
+
+```bash
+./build.sh ./code/wse-plugin-my-first-plugin
+```
+
+This process generates the following plugin .jar file, which can be deployed and run with Wowza Streaming Engine:
+
+`code/wse-plugin-my-first-plugin/build/libs/wse-plugin-my-first-plugin-1.0.0.jar`
+
 ### Test your module
 
-To test the newly created module, run:
+To test the newly created module, run the following from the root of your project:
 
 ```bash
 docker compose up
