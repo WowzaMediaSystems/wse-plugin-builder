@@ -9,8 +9,7 @@ import com.wowza.wms.application.WMSProperties;
 import com.wowza.wms.logging.WMSLogger;
 import com.wowza.wms.logging.WMSLoggerFactory;
 import com.wowza.wms.module.ModuleBase;
-import com.wowza.wms.stream.IMediaStream;
-import com.wowza.wms.stream.IMediaStreamActionNotify3;
+import com.wowza.wms.stream.*;
 import com.wowza.wms.media.model.MediaCodecInfoAudio;
 import com.wowza.wms.media.model.MediaCodecInfoVideo;
 import com.wowza.wms.amf.AMFPacket;
@@ -21,6 +20,7 @@ public class MyFirstModule extends ModuleBase
     public static String MODULE_NAME = CLASS.getSimpleName();
     public static final String MODULE_VERSION = ReleaseInfo.getVersion();
     private IApplicationInstance appInstance;
+    private IMediaStreamNotify mediaStreamListener = new MediaStreamListener();
 
     protected WMSLogger logger;
 
@@ -33,13 +33,21 @@ public class MyFirstModule extends ModuleBase
         this.appInstance=appInstance;
     }
 
+    public void onAppStart(IApplicationInstance appInstance)
+    {
+        WMSLoggerFactory.getLogger(null).info("onAppStart");
+        appInstance.addMediaStreamListener(mediaStreamListener);
+    }
+
     public void onAppStop(IApplicationInstance appInstance)
     {
-    }    
+        WMSLoggerFactory.getLogger(null).info("onAppStop");
+        appInstance.removeMediaStreamListener(mediaStreamListener);
+    }
 
     public void onStreamCreate(IMediaStream stream)
     {
-
+        WMSLoggerFactory.getLogger(null).info("onStreamCreate: " + stream.getSrc());
         StreamListener actionNotify = null;
         WMSProperties props = stream.getProperties();
         synchronized(props)
@@ -56,6 +64,7 @@ public class MyFirstModule extends ModuleBase
 
     public void onStreamDestroy(IMediaStream stream)
     {
+        WMSLoggerFactory.getLogger(null).info("onStreamDestroy: " + stream.getSrc());
         StreamListener actionNotify = null;
         WMSProperties props = stream.getProperties();
 
@@ -80,43 +89,70 @@ public class MyFirstModule extends ModuleBase
 
         public void onMetaData(IMediaStream stream, AMFPacket metaDataPacket)
         {
+            WMSLoggerFactory.getLogger(null).info("onMetaData: " + stream.getName());
         }
 
         public void onPauseRaw(IMediaStream stream, boolean isPause, double location)
         {
+            WMSLoggerFactory.getLogger(null).info("onPauseRaw: " + stream.getName());
         }
 
         public void onPause(IMediaStream stream, boolean isPause, double location)
         {
+            WMSLoggerFactory.getLogger(null).info("onPause: " + stream.getName());
         }
 
-        public void onSeek(IMediaStream iMediaStream, double v)
+        public void onSeek(IMediaStream stream, double v)
         {
+            WMSLoggerFactory.getLogger(null).info("onSeek: " + stream.getName());
         }
 
-        public void onStop(IMediaStream iMediaStream)
+        public void onStop(IMediaStream stream)
         {
+            WMSLoggerFactory.getLogger(null).info("onStop: " + stream.getName());
         }
 
         public void onPlay(IMediaStream stream, String streamName, double playStart, double playLen, int playReset)
         {
+            WMSLoggerFactory.getLogger(null).info("onPlay: " + stream.getName());
         }
 
         public void onPublish(IMediaStream stream, String streamName, boolean isRecord, boolean isAppend)
         {
+            WMSLoggerFactory.getLogger(null).info("onPublish: " + stream.getName());
         }
 
         public void onUnPublish(IMediaStream stream, String streamName, boolean isRecord, boolean isAppend)
         {
+            WMSLoggerFactory.getLogger(null).info("onUnPublish: " + stream.getName());
         }
 
         public void onCodecInfoVideo(IMediaStream stream, MediaCodecInfoVideo mediaCodecInfoVideo)
         {
+            WMSLoggerFactory.getLogger(null).info("onCodecInfoVideo: " + stream.getName());
         }
 
-        public void onCodecInfoAudio(IMediaStream iMediaStream, MediaCodecInfoAudio mediaCodecInfoAudio)
+        public void onCodecInfoAudio(IMediaStream stream, MediaCodecInfoAudio mediaCodecInfoAudio)
         {
+            WMSLoggerFactory.getLogger(null).info("onCodecInfoAudio: " + stream.getName());
         }
     }
+
+
+    public class MediaStreamListener implements IMediaStreamNotify
+    {
+
+        @Override
+        public void onMediaStreamCreate(IMediaStream stream)
+        {
+            WMSLoggerFactory.getLogger(null).info("onMediaStreamCreate: " + stream.getSrc());
+        }
+
+        @Override
+        public void onMediaStreamDestroy(IMediaStream stream)
+        {
+            WMSLoggerFactory.getLogger(null).info("onMediaStreamDestroy: " + stream.getSrc());
+        }
+    } 
 
 }
