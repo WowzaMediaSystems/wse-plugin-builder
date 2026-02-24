@@ -1,4 +1,4 @@
-FROM wowza/wowza-streaming-engine:latest-trial AS builder
+FROM wowza/wowza-streaming-engine:latest-slim AS builder
 
 RUN echo "$DOCKER_IMAGE_VERSION" > /tmp/DOCKER_IMAGE_VERSION
 
