@@ -14,20 +14,20 @@ java --version
 
 run_and_prompt() {
   echo ""
-  echo "==> ${gradle_cmd}ing"
-  eval "./gradlew ${gradle_cmd,,}"
+  echo "==> ${gradle_cmd}"
+  eval "./gradlew ${gradle_cmd,,} --no-watch-fs"
   echo ""
   echo ""
   if [[ "$INTERACTIVE" =~ ^[nNFf0].*$ ]]; then
     echo ""
-    echo "Exiting. Thanks for ${gradle_cmd}ing!"
+    echo "Exiting. Thanks for ${gradle_cmd}!"
     exit 0
   fi
 
   read -p "Press any key to re-${gradle_cmd}, 'B' to build, 'C' to clean 'Q' to quit: " -n 1 -r
   if [[ $REPLY =~ ^[Qq]$ ]]; then
   	echo ""
-    echo "Exiting. Thanks for ${gradle_cmd}ing!"
+    echo "Exiting. Thanks for ${gradle_cmd}!"
     exit 0
   elif [[ $REPLY =~ ^[bB]$ ]]; then
   	gradle_cmd="Build"
